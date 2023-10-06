@@ -1,9 +1,5 @@
 package com.naasdemo.ziggonaasdemo.config;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import org.apache.logging.log4j.LogManager;
-
-import java.io.InputStream;
-import java.util.logging.Logger;
 
 public class WireMockConfigurator {
 
