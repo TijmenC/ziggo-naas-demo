@@ -1,0 +1,23 @@
+package com.naasdemo.ziggonaasdemo.config;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import org.apache.logging.log4j.LogManager;
+
+import java.io.InputStream;
+import java.util.logging.Logger;
+
+public class WireMockConfigurator {
+
+    public static void configureWireMockStubs() {
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/activate"))
+                .withRequestBody(WireMock.equalToJson("{\"customerId\": \"12345\", \"macAddress\": \"AA:BB:CC:DD:EE:FF\"}"))
+                .willReturn(WireMock.aResponse().withStatus(201)));
+
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/activate"))
+                .withRequestBody(WireMock.equalToJson("{\"customerId\": \"12345\", \"macAddress\": \"AA:BB:CC:DD:EE:AA\"}"))
+                .willReturn(WireMock.aResponse().withStatus(404)));
+
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/activate"))
+                .withRequestBody(WireMock.equalToJson("{\"customerId\": \"11111\", \"macAddress\": \"AA:BB:CC:DD:EE:FF\"}"))
+                .willReturn(WireMock.aResponse().withStatus(409)));
+    }
+}

@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZiggoNaasDemoApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ZiggoNaasDemoApplication.class, args);
+
+
 	}
 
 }
