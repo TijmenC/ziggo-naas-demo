@@ -3,11 +3,14 @@ package com.naasdemo.ziggonaasdemo;
 import com.naasdemo.ziggonaasdemo.controller.PinController;
 import com.naasdemo.ziggonaasdemo.model.Pin;
 import com.naasdemo.ziggonaasdemo.service.PinService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ZiggoNaasDemoApplication {
+	private static final Logger logger = LogManager.getLogger(ZiggoNaasDemoApplication.class);
 
 	public static void main(String[] args) {
 
@@ -29,9 +32,9 @@ public class ZiggoNaasDemoApplication {
 
 		pinService.stopWireMockserver();
 
-		System.out.println("Result for pinSuccessful: " + resultSuccessful);
-		System.out.println("Result for pinNotRegistered: " + resultNotRegistered);
-		System.out.println("Result for pinIsAttached: " + resultIsAttached);
+		logger.info("Result for pinSuccessful: " + resultSuccessful);
+		logger.info("Result for pinNotRegistered: " + resultNotRegistered);
+		logger.info("Result for pinIsAttached: " + resultIsAttached);
 	}
 
 }
