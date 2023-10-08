@@ -33,16 +33,16 @@ public class PinService {
         switch (statusCode) {
             case 201:
                 logger.info("StatusCode: " + statusCode +  " The PIN terminal was not attached to any customer ID and has been successfully activated." + " Request: " + request);
-                return ("ACTIVE");
+                return "ACTIVE";
             case 404:
                 logger.warn("StatusCode: " + statusCode + " The PIN terminal was not registered in the southbound system and cannot be activated");
-                return ("INACTIVE");
+                return "INACTIVE";
             case 409:
                 logger.warn("StatusCode: " + statusCode + " The PIN terminal is already attached to a different customer ID and cannot be activated for the new customer");
-                return ("INACTIVE");
+                return "INACTIVE";
             default:
                 logger.warn("Unknown status code detected:" + statusCode);
-                return ("UNKNOWN");
+                return "UNKNOWN";
         }
     }
 }

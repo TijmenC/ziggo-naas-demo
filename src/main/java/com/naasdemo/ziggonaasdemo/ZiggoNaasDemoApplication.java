@@ -20,18 +20,23 @@ public class ZiggoNaasDemoApplication {
 
 		PinController pinController = new PinController();
 
+		// Start the WireMock server
 		pinService.startWireMockServer();
 
+		// Create 3 Pin scenarios which correlates to the WireMock stubs
 		Pin pinSuccessful = new Pin(12345, "AA:BB:CC:DD:EE:FF");
 		Pin pinNotRegistered = new Pin(12345, "AA:BB:CC:DD:EE:AA");
 		Pin pinIsAttached = new Pin(11111, "AA:BB:CC:DD:EE:FF");
 
+		// Make the Southbound API call the previously defined Pin objects and save the response
 		String resultSuccessful = pinController.activatePinTerminal(pinSuccessful);
 		String resultNotRegistered = pinController.activatePinTerminal(pinNotRegistered);
 		String resultIsAttached = pinController.activatePinTerminal(pinIsAttached);
 
+		// Stop the WireMock server
 		pinService.stopWireMockserver();
 
+		// Log the results of each call
 		logger.info("Result for pinSuccessful: " + resultSuccessful);
 		logger.info("Result for pinNotRegistered: " + resultNotRegistered);
 		logger.info("Result for pinIsAttached: " + resultIsAttached);

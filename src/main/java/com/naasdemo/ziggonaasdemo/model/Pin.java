@@ -1,10 +1,10 @@
 package com.naasdemo.ziggonaasdemo.model;
 
 public class Pin {
-    private final long customerId;
+    private final Integer customerId;
     private final String macAddress;
 
-    public Pin(long customerId, String macAddress) {
+    public Pin(Integer customerId, String macAddress) {
         this.customerId = customerId;
         this.macAddress = macAddress;
     }
