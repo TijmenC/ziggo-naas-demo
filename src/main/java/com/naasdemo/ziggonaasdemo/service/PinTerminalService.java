@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
 
-public class PinService {
-    private static final Logger logger = LogManager.getLogger(PinService.class);
+public class PinTerminalService {
+    private static final Logger logger = LogManager.getLogger(PinTerminalService.class);
     private static WireMockServer wireMockServer;
 
     public void startWireMockServer() {

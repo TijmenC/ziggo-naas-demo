@@ -9,16 +9,16 @@ ZiggoNaasDemo is a Java application that demonstrates the interaction between a 
 - **Location**: `com.naasdemo.ziggonaasdemo.ZiggoNaasDemoApplication`
 - **Description**: The main class of the application that initializes the Spring Boot application, starts the WireMock server, activates PIN terminals, and logs the results.
 
-### 2. PinService
-- **Location**: `com.naasdemo.ziggonaasdemo.service.PinService`
+### 2. PinTerminalService
+- **Location**: `com.naasdemo.ziggonaasdemo.service.PinTerminalService`
 - **Description**: Manages the WireMock server, starts and stops it, and handles responses based on the simulated HTTP status codes.
 
-### 3. Pin
-- **Location**: `com.naasdemo.ziggonaasdemo.model.Pin`
-- **Description**: Represents a PIN with attributes such as customer ID and MAC address.
+### 3. PinTerminal
+- **Location**: `com.naasdemo.ziggonaasdemo.model.PinTerminal`
+- **Description**: Represents a pin terminal with attributes such as customer ID and MAC address.
 
-### 4. PinController
-- **Location**: `com.naasdemo.ziggonaasdemo.controller.PinController`
+### 4. PinTerminalController
+- **Location**: `com.naasdemo.ziggonaasdemo.controller.PinTerminalController`
 - **Description**: Sends HTTP requests to activate PIN terminals, converts PIN objects to JSON payloads, and processes the WireMock responses.
 
 ### 5. WireMockConfigurator
