@@ -14,7 +14,6 @@ public class PinTerminalService {
     private static WireMockServer wireMockServer;
 
     public void startWireMockServer() {
-
         // Start WireMock Server
         wireMockServer = new WireMockServer(WireMockConfiguration.wireMockConfig().port(8081));
         wireMockServer.start();

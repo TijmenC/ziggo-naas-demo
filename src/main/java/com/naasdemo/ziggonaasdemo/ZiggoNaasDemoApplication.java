@@ -10,36 +10,34 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ZiggoNaasDemoApplication {
-	private static final Logger logger = LogManager.getLogger(ZiggoNaasDemoApplication.class);
+    private static final Logger logger = LogManager.getLogger(ZiggoNaasDemoApplication.class);
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        SpringApplication.run(ZiggoNaasDemoApplication.class, args);
 
-		SpringApplication.run(ZiggoNaasDemoApplication.class, args);
+        PinTerminalService pinTerminalService = new PinTerminalService();
 
-		PinTerminalService pinTerminalService = new PinTerminalService();
+        PinTerminalController pinTerminalController = new PinTerminalController();
 
-		PinTerminalController pinTerminalController = new PinTerminalController();
+        // Start the WireMock server
+        pinTerminalService.startWireMockServer();
 
-		// Start the WireMock server
-		pinTerminalService.startWireMockServer();
+        // Create 3 Pin Terminal scenarios which correlates to the WireMock stubs
+        PinTerminal pinTerminalSuccessful = new PinTerminal(12345, "AA:BB:CC:DD:EE:FF");
+        PinTerminal pinTerminalNotRegistered = new PinTerminal(12345, "AA:BB:CC:DD:EE:AA");
+        PinTerminal pinTerminalIsAttached = new PinTerminal(11111, "AA:BB:CC:DD:EE:FF");
 
-		// Create 3 Pin Terminal scenarios which correlates to the WireMock stubs
-		PinTerminal pinTerminalSuccessful = new PinTerminal(12345, "AA:BB:CC:DD:EE:FF");
-		PinTerminal pinTerminalNotRegistered = new PinTerminal(12345, "AA:BB:CC:DD:EE:AA");
-		PinTerminal pinTerminalIsAttached = new PinTerminal(11111, "AA:BB:CC:DD:EE:FF");
+        // Make the API calls to the Southbound system and save the responses
+        String resultSuccessful = pinTerminalController.activatePinTerminal(pinTerminalSuccessful);
+        String resultNotRegistered = pinTerminalController.activatePinTerminal(pinTerminalNotRegistered);
+        String resultIsAttached = pinTerminalController.activatePinTerminal(pinTerminalIsAttached);
 
-		// Make the API calls to the Southbound system and save the responses
-		String resultSuccessful = pinTerminalController.activatePinTerminal(pinTerminalSuccessful);
-		String resultNotRegistered = pinTerminalController.activatePinTerminal(pinTerminalNotRegistered);
-		String resultIsAttached = pinTerminalController.activatePinTerminal(pinTerminalIsAttached);
+        // Stop the WireMock server
+        pinTerminalService.stopWireMockserver();
 
-		// Stop the WireMock server
-		pinTerminalService.stopWireMockserver();
-
-		// Log the results of each call
-		logger.info("Result for pinTerminalSuccessful: " + resultSuccessful);
-		logger.info("Result for pinTerminalNotRegistered: " + resultNotRegistered);
-		logger.info("Result for pinTerminalIsAttached: " + resultIsAttached);
-	}
-
+        // Log the results of each call
+        logger.info("Result for pinTerminalSuccessful: " + resultSuccessful);
+        logger.info("Result for pinTerminalNotRegistered: " + resultNotRegistered);
+        logger.info("Result for pinTerminalIsAttached: " + resultIsAttached);
+    }
 }
